@@ -9,7 +9,7 @@ library(sp)
 library(maps)
 library(maptools)
 
-setwd('~/Documents/twitter/')
+setwd('~/Google Drive/twitter/')
 
 #### Read in the tweets coordinates collected with Tweepy
 #### as SpatialPoints
