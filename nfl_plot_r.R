@@ -1,3 +1,10 @@
+#--------------------------------
+# Name:         nfl_plot_r.R
+# Purpose:      Plot the coords saved in the CSV file from Python
+# Author:       Andrew Vitale  vitale232@gmail.com
+# Created       2014/09/10
+# R:            3.1.1
+#--------------------------------
 library(sp)
 library(maps)
 library(maptools)
