@@ -6,6 +6,7 @@ import time
 import re
 import os
 import sys
+import datetime as dt
 
 # search terms, ariana will get some tweets, reno not too many
 search_terms = ['steelers']
@@ -19,20 +20,32 @@ from auth import consumer_key, consumer_secret, access_token, access_token_secre
 class StdOutListener(StreamListener):
     
     def on_data(self, data):
-        if not os.path.isfile(os.path.join(os.getcwd(), 'steelers.csv')):
-            c = open('steelers.csv', 'w')
+        if not os.path.isfile(os.path.join(os.getcwd(), 'steelers_coords.csv')):
+            c = open('steelers_coords.csv', 'w')
             c.write('long, lat\n')
             c.close()
 
-        t = open('steelers.csv', 'a+')
-        c = open('steelers.csv', 'a+')
+        if not os.path.isfile(os.path.join(os.getcwd(), 'steelers_tweets.csv')):
+            c = open('steelers_tweets.csv', 'w')
+            c.write('tweet, time\n')
+            c.close()
+
+        t = open('steelers_tweets.csv', 'a+')
+        c = open('steelers_coords.csv', 'a+')
+
         # serialize the output
         json_data = json.loads(data)
+
         # push the tweet text to the display
         # encode to utf-8 to avoid codec errors on Ubuntu
+        timestamp = dt.datetime.fromtimestamp(int(json_data['timestamp_ms'])/1000)
+        this_tweet = str(json_data['text'].encode('utf-8'))
+
+        print('Tweet at {0}:\n{1}'.format(timestamp, this_tweet))
         print json_data['text'].encode('utf-8')
-        t.write(str(json_data['text'].encode('utf-8')) + '\n')
-        print json_data['coordinates']
+        t.write('"{0}", {1}\n'.format(this_tweet, timestamp))
+
+        print str(json_data['coordinates']) + '\n'
         if json_data['coordinates'] is not None:
             m = re.search('-[\d|., ]*', str(json_data['coordinates']))
             if m is not None:
@@ -57,7 +70,7 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
     stream.filter(track=search_terms, async=True)
-    time.sleep(1)
+    time.sleep(86400)
     stream.disconnect()
 
     end_time = time.strftime('%Y-%m-%d %H:%M:%S')
