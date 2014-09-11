@@ -5,11 +5,12 @@
 # Created       2014/09/10
 # R:            3.1.1
 #--------------------------------
-library(sp)
+library(raster)
+library(rgdal)
 library(maps)
 library(maptools)
 
-setwd('~/Google Drive/twitter/')
+setwd('~/Google Drive/twitter/Overnight-Test/')
 
 #### Read in the tweets coordinates collected with Tweepy
 #### as SpatialPoints
@@ -27,6 +28,7 @@ the_map_sp = map2SpatialPolygons(the_map, IDs=IDs,
 
 #### Set up a blank raster of the world
 r = raster(nrow=720, ncol=1440)
+# r=raster()
 
 #### create a blank list and loop through each row of tweets, making a raster
 #### with value 1 where coordinates reside, and store each raster in the list
@@ -62,4 +64,4 @@ plot(density, add=TRUE, col=cols(14))#,
 #      sub='Tweets recorded from 20:30 to 22:45, 2014-09-10')
 plot(the_map_sp, add=TRUE, col=NA, border='black')
 title("Tweets tagged '#nfl', 'goodell', 'nflcommish', '#RayRice'", cex=1.25)
-mtext('Recorded from 20:30 to 22:45 PDT, 2014-09-10', cex=1.25)
+mtext('Recorded from 02:30 to 08:30 PDT, 2014-09-10', cex=1.25)
