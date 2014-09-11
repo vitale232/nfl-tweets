@@ -10,10 +10,10 @@ import os
 search_terms = ['#nfl', 'goodell', 'nflcommish', '#RayRice']
 
 # Twitter API credentials
-consumer_key = '3vojitMRV06dWGdMJDb1eWKI9'
-consumer_secret = 'fGhxVat5cXvro3IzEHyjauduNQpnO26FwD4hKSZwQ64ucnm9SJ'
-access_token = '41348505-3eby6GPwQMSkL1Lz2sXVYIKUrf2P2K2gvlabjc9Yr'
-access_token_secret = '8kTWNymhcvmC5HDFphwiZgOH1j0ctVoW8GHbfXsFLCqeH'
+consumer_key = 'secret'
+consumer_secret = 'secret'
+access_token = 'I\'ve got a'
+access_token_secret = 'secret'
 
 # listener
 class StdOutListener(StreamListener):
