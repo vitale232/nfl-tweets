@@ -49,37 +49,36 @@ the_map_sp = spTransform(the_map_sp, CRS(aea))
 steelers_count = projectRaster(steelers_count, crs=aea, method='ngb')
 ravens_count = projectRaster(ravens_count, crs=aea, method='ngb')
 
-#### the projection left sme 
-steelers_count[which(!is.na(values(steelers_count)))] = 
-  round(values(steelers_count)[-which(is.na(values(steelers_count)))], 0)
-ravens_count[which(!is.na(values(ravens_count)))] = 
-  round(values(ravens_count)[-which(is.na(values(ravens_count)))], 0)
-
+#### Set up the color ramps
 steelers_cols = colorRampPalette(c('black', 'yellow'))
 ravens_cols  = colorRampPalette(c('darkorchid4', 'white'))
 
-# png('./steelers_map.png', width=10, height=7, units='in', res=300)
-x11(height=7, width=10)
+#### plot the steelers map to disk as a PNG file
+png('./steelers_map.png', width=10, height=7, units='in', res=300)
+# x11(height=7, width=10)
 par(mar=c(5, 0, 4, 2) + 0.1)
 plot(the_map_sp, axes=FALSE, col='azure2', border='black')
 plot(steelers_count, add=TRUE, col=steelers_cols(255))
 plot(the_map_sp, add=TRUE, col=NA, border='black')
 title("Tweets Returned for Search of 'Steelers'", cex=1.25)
 mtext('Recorded from 15:12 2014-09-11 to 03:12 PDT 2014-09-12', cex=1.25)
-# dev.off()
+dev.off()
 
-# png('./ravens_map.png', width=10, height=7, units='in', res=300)
-x11(height=7, width=10)
+#### Plot the ravens map to disk as a PNG file
+png('./ravens_map.png', width=10, height=7, units='in', res=300)
+# x11(height=7, width=10)
 par(mar=c(5, 0, 4, 2) + 0.1)
 plot(the_map_sp, axes=FALSE, col='azure2', border='black')
 plot(ravens_count, add=TRUE, col=ravens_cols(255))
 plot(the_map_sp, add=TRUE, col=NA, border='black')
 title("Tweets Returned for Search of 'Ravens'", cex=1.25)
 mtext('Recorded from 15:12 2014-09-11 to 03:12 PDT 2014-09-12', cex=1.25)
-# dev.off()
+dev.off()
 
-# png('./both_maps.png', width=9, height=11, units='in', res=350)
-x11(height=11, width=9)
+
+#### plot both to disk as PNG for reddit
+png('./both_maps.png', width=9, height=11, units='in', res=350)
+# x11(height=11, width=9)
 par(mar=c(0, 0, 4, 1) + 0.1, mfrow=c(2,1))
 plot(the_map_sp, axes=FALSE, col='azure2', border='black')
 plot(steelers_count, add=TRUE, col=steelers_cols(255))
@@ -92,4 +91,4 @@ plot(ravens_count, add=TRUE, col=ravens_cols(255))
 plot(the_map_sp, add=TRUE, col=NA, border='black')
 title("Number of Tweets Returned for Search of 'Ravens'", cex=1.25)
 mtext('Recorded from 15:12 2014-09-11 to 03:12 PDT 2014-09-12', cex=1.25)
-# dev.off()
+dev.off()
