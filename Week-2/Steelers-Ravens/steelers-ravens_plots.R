@@ -61,6 +61,7 @@ mtext('Recorded from 15:12 2014-09-11 to 03:12 PDT 2014-09-12', cex=1.25)
 dev.off()
 
 png('./ravens_map.png', width=10, height=7, units='in', res=300)
+par(mar=c(5, 0, 4, 2) + 0.1)
 plot(the_map_sp, axes=FALSE, col='azure2', border='black')
 plot(ravens_count, add=TRUE, col=ravens_cols(255))
 plot(the_map_sp, add=TRUE, col=NA, border='black')
