@@ -18,6 +18,7 @@ from auth import consumer_key, consumer_secret, access_token, access_token_secre
 
 coord_filename = 'isis_coords.csv'
 tweet_filename = 'isis_tweets.csv'
+
 # listener
 class StdOutListener(StreamListener):
     
@@ -43,7 +44,6 @@ class StdOutListener(StreamListener):
         timestamp = dt.datetime.fromtimestamp(int(json_data['timestamp_ms'])/1000)
         this_tweet = str(json_data['text'].encode('utf-8')).replace('\n', '')
 
-        print(pprint.pprint(json_data))
         print('Tweet at {0}:\n{1}'.format(timestamp, this_tweet))
         t.write('"{0}", {1}\n'.format(this_tweet, timestamp))
 
