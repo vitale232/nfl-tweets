@@ -7,9 +7,10 @@ import re
 import os
 import sys
 import datetime as dt
+import pprint
 
 # search terms, ariana will get some tweets, reno not too many
-search_terms = ['ISIS']
+search_terms = ['#theresnowayitsanyonebutme']
 
 # Twitter API credentials
 sys.path.append('/home/vitale232/Documents/twitter')
@@ -42,14 +43,15 @@ class StdOutListener(StreamListener):
         timestamp = dt.datetime.fromtimestamp(int(json_data['timestamp_ms'])/1000)
         this_tweet = str(json_data['text'].encode('utf-8')).replace('\n', '')
 
+        print(pprint.pprint(json_data))
         print('Tweet at {0}:\n{1}'.format(timestamp, this_tweet))
         t.write('"{0}", {1}\n'.format(this_tweet, timestamp))
 
         print str(json_data['coordinates']) + '\n'
         if json_data['coordinates'] is not None:
-            m = re.search('-[\d|., ]*', str(json_data['coordinates']))
+            m = re.search('\[[\d|., \-]*', str(json_data['coordinates']))
             if m is not None:
-                c.write(str(m.group()) + '\n')
+                c.write(str(m.group()[1:]) + '\n')
 
         # append each json object to the list
         t.close()
