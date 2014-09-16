@@ -7,7 +7,6 @@ import re
 import os
 import sys
 import datetime as dt
-import pprint
 
 # search terms, ariana will get some tweets, reno not too many
 search_terms = ['ISIS']
