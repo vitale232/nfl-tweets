@@ -10,7 +10,7 @@ import datetime as dt
 import pprint
 
 # search terms, ariana will get some tweets, reno not too many
-search_terms = ['#theresnowayitsanyonebutme']
+search_terms = ['ISIS']
 
 # Twitter API credentials
 sys.path.append('/home/vitale232/Documents/twitter')
