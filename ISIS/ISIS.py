@@ -70,7 +70,7 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
     stream.filter(track=search_terms, async=True)
-    time.sleep(120)
+    time.sleep(86400)
     stream.disconnect()
 
     end_time = time.strftime('%Y-%m-%d %H:%M:%S')
