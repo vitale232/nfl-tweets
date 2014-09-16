@@ -49,7 +49,6 @@ class StdOutListener(StreamListener):
         if json_data['coordinates'] is not None:
             m = re.search('-[\d|., ]*', str(json_data['coordinates']))
             if m is not None:
-                print(m.group())
                 c.write(str(m.group()) + '\n')
 
         # append each json object to the list
