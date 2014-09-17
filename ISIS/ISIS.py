@@ -42,11 +42,13 @@ class StdOutListener(StreamListener):
         # encode to utf-8 to avoid codec errors on Ubuntu
         timestamp = dt.datetime.fromtimestamp(int(json_data['timestamp_ms'])/1000)
         this_tweet = str(json_data['text'].encode('utf-8')).replace('\n', '')
+        this_tweet = this_tweet.replace('\r', '')
 
         print('Tweet at {0}:\n{1}'.format(timestamp, this_tweet))
         t.write('"{0}", {1}\n'.format(this_tweet, timestamp))
 
         print str(json_data['coordinates']) + '\n'
+        
         if json_data['coordinates'] is not None:
             m = re.search('\[[\d|., \-]*', str(json_data['coordinates']))
             if m is not None:
