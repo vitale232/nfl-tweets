@@ -9,7 +9,7 @@ import sys
 import datetime as dt
 
 # search terms, ariana will get some tweets, reno not too many
-search_terms = ['ISIS']
+search_terms = ['ISIS', 'ISIL']
 
 # Twitter API credentials
 sys.path.append('/home/vitale232/Documents/twitter')
