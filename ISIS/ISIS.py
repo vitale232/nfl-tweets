@@ -29,7 +29,7 @@ class StdOutListener(StreamListener):
 
         if not os.path.isfile(os.path.join(os.getcwd(), tweet_filename)):
             c = open(tweet_filename, 'w')
-            c.write('tweet, time\n')
+            c.write('tweet\ttime\n')
             c.close()
 
         t = open(tweet_filename, 'a+')
@@ -45,7 +45,7 @@ class StdOutListener(StreamListener):
         this_tweet = this_tweet.replace('\r', '')
 
         print('Tweet at {0}:\n{1}'.format(timestamp, this_tweet))
-        t.write('"{0}", {1}\n'.format(this_tweet, timestamp))
+        t.write('{0}\t{1}\n'.format(this_tweet, timestamp))
 
         print str(json_data['coordinates']) + '\n'
         
